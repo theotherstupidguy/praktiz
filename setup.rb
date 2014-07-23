@@ -1,0 +1,8 @@
+Mushin[:framework] = 'praktiz'
+Mushin[:author] = ''
+Mushin[:email] = ''
+Mushin[:license] = ''
+Mushin[:desc] = ''
+Mushin[:website] = ''
+Mushin[:ds_summary] = ''
+Mushin[:ds_desc] = ''

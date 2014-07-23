@@ -1,0 +1,10 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    mushin (0.0.0.pre71)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  mushin

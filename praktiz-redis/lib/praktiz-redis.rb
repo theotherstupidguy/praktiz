@@ -1,0 +1,1 @@
+require 'praktiz-redis/base'

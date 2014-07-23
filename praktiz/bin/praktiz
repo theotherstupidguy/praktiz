@@ -1,0 +1,62 @@
+#!/usr/bin/env ruby
+
+require 'fileutils'
+@name = "Points".capitalize 
+@middleware = 'praktiz-' + @name.downcase
+
+# Generates a Praktiz Middleware Gem
+#
+if File.directory?(@middleware.downcase)
+  FileUtils.remove_dir (Dir::pwd + "/" + @middleware.downcase) 
+end
+Dir.mkdir(Dir::pwd + "/" + @middleware.downcase) 
+Dir.mkdir(Dir::pwd + "/" + @middleware.downcase + "/lib") 
+Dir.mkdir(Dir::pwd + "/" + @middleware.downcase + "/lib/" + @middleware.downcase) 
+
+df = File.new(@middleware.downcase + "/" + @middleware.downcase + ".gemspec", "w") 
+df.puts <<-gf
+# coding: utf-8
+lib = File.expand_path('../lib', __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+
+Gem::Specification.new do |spec|
+  spec.name          = "#{@middleware}"
+  spec.version       = "0.0.0.pre1"
+  spec.authors       = [""]
+  spec.email         = [""]
+  spec.summary       = "" 
+  spec.description   = ""
+  spec.homepage      = ""
+  spec.license       = ""
+
+  spec.files       =  Dir.glob("{lib}/**/*")  
+  spec.require_paths = ["lib"]
+end
+gf
+df.close
+df = File.new(@middleware.downcase + "/lib/" + @middleware.downcase  + ".rb", "w") 
+df.puts("require " + "'" + @middleware + "/base" + "'")
+df.close
+
+df = File.new(@middleware.downcase + "/lib/" + @middleware.downcase + "/base.rb", "w") 
+
+df.puts("Praktiz::Env.register do")
+df.puts("  #TODO add needed code to praktiz Env")
+df.puts("end")
+
+df.puts("module Praktiz")
+df.puts("  class #{@name}")
+df.puts("    include Praktiz::Middleware ")
+df.puts("    def initialize(app, opts={},params={})")
+df.puts("      @app = app")
+df.puts("      @opts = opts ")
+df.puts("      @params = params")
+df.puts("    end")
+df.puts("    def call(env)")
+df.puts("      #TODO add code here to be executed before calling the next middleware")
+df.puts("      @app.call(env) # run the next middleware")
+df.puts("      #TODO add code here to be executed after calling the next middleware ")
+df.puts("    end")
+df.puts("  end")
+df.puts("end")
+df.close
