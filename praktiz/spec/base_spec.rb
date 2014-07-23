@@ -6,7 +6,7 @@ $:.unshift File.expand_path(File.dirname(__FILE__) + '/..')
 
 require 'lib/praktiz/base'
 
-describe Praktiz::Middleware do
+describe Praktiz::Middleware, "Praktize Domain Middlewares" do
   subject {Praktiz::Middleware} 
   it "must include mushin middleware" do 
     subject.must_include Mushin::Domain::Middleware
@@ -19,7 +19,26 @@ describe Praktiz::DSL do
     subject.must_include Mushin::DSL
   end
   it "#find" do 
-    p subject
     subject.must_respond_to :find
+  end
+end
+
+describe Praktiz::Engine do
+  subject {Praktiz::Engine} 
+  it "must extend mushin engine" do 
+    subject.must_be_kind_of Mushin::Engine
+  end
+  it "#run" do 
+    subject.must_respond_to :run
+  end
+end
+
+describe Praktiz::Env do
+  subject {Praktiz::Env} 
+  it "must extend Mushin::Env" do 
+    subject.must_be_kind_of Mushin::Env
+  end
+  it "must have an ID" do 
+    subject.must_respond_to :id
   end
 end
