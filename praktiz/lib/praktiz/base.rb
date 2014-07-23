@@ -1,3 +1,5 @@
+require 'mushin'
+
 module Praktiz
   module Middleware 
     include Mushin::Domain::Middleware

@@ -12,6 +12,9 @@ Gem::Specification.new do |spec|
   spec.homepage      = ""
   spec.license       = ""
 
+  spec.add_runtime_dependency "mushin"
+  spec.add_development_dependency "mushin"
+
   spec.files       =  Dir.glob("{lib}/**/*")  
   spec.require_paths = ["lib"]
 end
