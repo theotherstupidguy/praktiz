@@ -1,6 +1,14 @@
 require 'mushin'
-
+#require 'praktiz-redis'
 module Praktiz
+  module Persistence
+    class DS
+      def self.load id
+	raise NotImplementedError 
+      end
+    end
+    #raise "Must include a Persistence Repository Middleware"
+  end
   module Middleware 
     include Mushin::Domain::Middleware
   end
@@ -44,7 +52,6 @@ module Praktiz
 
     class << self
       attr_accessor :id
-
       def get id
         Praktiz::Persistence::DS.load id.to_s + "praktiz"
       end
@@ -70,5 +77,6 @@ module Praktiz
 	return Praktiz::Persistence::DS.load @id 
       end
     end
+
   end
 end

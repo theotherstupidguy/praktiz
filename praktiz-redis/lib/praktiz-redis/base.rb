@@ -1,12 +1,15 @@
+require "praktiz"
 require "redis"
 
 module Praktiz 
   module Persistence
     class DS 
-
+      #TODO each generated middleware contains this Praktiz::Env.register block
       Praktiz::Env.register do 
-	attr_accessor :id
+	#attr_accessor :id #not needed as praktiz gem already declares it
       end
+
+      attr_accessor :id #just for testing-sake
 
       @@redis = Redis.new
 
@@ -34,6 +37,7 @@ module Praktiz
       def DS.store obj
 	begin
 	  @praktiz_env = Marshal.dump obj 
+	#p Marshal.load (@@redis.get(obj.id))
 	  @@redis.set(obj.id, @praktiz_env)
 	ensure
 	  p "storing praktiz Env " + obj.to_s
