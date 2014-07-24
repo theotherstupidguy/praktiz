@@ -52,7 +52,6 @@ describe Praktiz::Env do
     subject.must_respond_to :get
   end
   it "raise error if gets an ID" do 
-    #skip
     proc{subject.get("JamesBond")}.must_raise NotImplementedError
   end
 end
